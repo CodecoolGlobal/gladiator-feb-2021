@@ -11,11 +11,11 @@ public abstract class Gladiator {
     /**
      * Constructor for Gladiators
      *
-     * @param name the gladiator's name
-     * @param baseHp the gladiator's base Health Points
-     * @param baseSp the gladiator's base Strength Points
+     * @param name    the gladiator's name
+     * @param baseHp  the gladiator's base Health Points
+     * @param baseSp  the gladiator's base Strength Points
      * @param baseDex the gladiator's base Dexterity Points
-     * @param level the gladiator's starting Level
+     * @param level   the gladiator's starting Level
      */
     public Gladiator(String name, int baseHp, int baseSp, int baseDex, int level) {
         this.name = name;
@@ -55,8 +55,11 @@ public abstract class Gladiator {
      * @return the full name
      */
     public String getFullName() {
-        // Todo
-        return name;
+        return getClass().getSimpleName() + " " + name;
+    }
+
+    public void levelUp() {
+        level++;
     }
 
     public enum Multiplier {
@@ -74,5 +77,6 @@ public abstract class Gladiator {
             return value;
         }
     }
+
 
 }
