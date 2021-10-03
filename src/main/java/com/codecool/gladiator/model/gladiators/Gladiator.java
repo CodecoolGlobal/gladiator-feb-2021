@@ -7,6 +7,7 @@ public abstract class Gladiator {
     private final int baseSp;
     private final int baseDex;
     private int level;
+    private int hp;
 
     /**
      * Constructor for Gladiators
@@ -76,6 +77,34 @@ public abstract class Gladiator {
         public double getValue() {
             return value;
         }
+    }
+
+    public int getMaxHp(){
+        return (int) (this.baseHp * getHpMultiplier().value * this.level);
+    }
+
+    public int getMaxSp(){
+        return (int) (this.baseSp * getSpMultiplier().value * this.level);
+    }
+
+    public int getMaxDex(){
+        return (int) (this.baseDex * getDexMultiplier().value * this.level);
+    }
+
+    public void decreaseHpBy(int deltaHp){
+        hp -= deltaHp;
+    }
+
+    public boolean isDead(){
+        return hp <= 0;
+    }
+
+    public void healUp(){
+        hp = getMaxHp();
+    }
+
+    public int getCurrentHp() {
+        return hp;
     }
 
 

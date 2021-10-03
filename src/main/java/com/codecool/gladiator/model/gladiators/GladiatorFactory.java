@@ -1,5 +1,7 @@
 package com.codecool.gladiator.model.gladiators;
 
+import com.codecool.gladiator.util.RandomUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,7 +9,13 @@ import java.util.List;
 
 public class GladiatorFactory {
 
+    private static final int LOWER_STAT_VALUE = 25;
+    private static final int UPPER_STAT_VALUE = 100;
+    private static final int LOWER_LEVEL_VALUE = 1;
+    private static final int UPPER_LEVEL_VALUE = 5;
+
     private List<String> names;
+
 
     public GladiatorFactory(String fileOfNames) {
         try {
@@ -25,8 +33,7 @@ public class GladiatorFactory {
      * @return gladiator name
      */
     private String getRandomName() {
-        // Todo
-        return "Brutus";
+        return RandomUtils.getRandomItemFromList(names);
     }
 
     /**
@@ -36,7 +43,22 @@ public class GladiatorFactory {
      * @return new Gladiator
      */
     public Gladiator generateRandomGladiator() {
-        // Todo
-        return new Brutal(getRandomName(), 50, 50, 50, 1);
+        int randomHp = RandomUtils.getRandomNumberFromRange(LOWER_STAT_VALUE, UPPER_STAT_VALUE);
+        int randomSp = RandomUtils.getRandomNumberFromRange(LOWER_STAT_VALUE, UPPER_STAT_VALUE);
+        int randomDex = RandomUtils.getRandomNumberFromRange(LOWER_STAT_VALUE, UPPER_STAT_VALUE);
+        int randomLevel = RandomUtils.getRandomNumberFromRange(LOWER_LEVEL_VALUE, UPPER_LEVEL_VALUE);
+
+        int randomGladiatorIndicator = RandomUtils.getRandomNumberFromRange(1,5);
+        switch (randomGladiatorIndicator){
+            case 1:
+            case 2:
+                return new Swordsman(getRandomName(), randomHp, randomSp, randomDex, randomLevel);
+            case 3:
+                return new Archer(getRandomName(), randomHp, randomSp, randomDex, randomLevel);
+            case 4:
+                return new Assassin(getRandomName(), randomHp, randomSp, randomDex, randomLevel);
+            default:
+                return new Brutal(getRandomName(), randomHp, randomSp, randomDex, randomLevel);
+        }
     }
 }
